@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">marvel</string>
+    <string name="character_image_placeholder">We missed something… Nevermind</string>
+</resources>
