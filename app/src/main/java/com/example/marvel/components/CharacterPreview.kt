@@ -1,41 +1,46 @@
 package com.example.marvel.components
 
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import coil.compose.AsyncImagePainter
-import coil.compose.rememberAsyncImagePainter
-import coil.request.ImageRequest
-import com.example.marvel.model.CharacterModel
 import com.example.marvel.R
+import com.example.marvel.model.CharacterModel
 
 @Composable
-fun DrawCharacterPreview(modifier: Modifier = Modifier, model: CharacterModel) {
+fun CharacterPreview(modifier: Modifier = Modifier, model: CharacterModel) {
     Box(modifier = modifier) {
-        Image(
-            painter = model.img,
+        AsyncImage(
+            model = model.img,
+            modifier = modifier
+                .fillMaxHeight()
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(16.dp)),
             contentDescription = stringResource(R.string.character_image_placeholder)
         )
-
     }
 }
 
 @Preview(showSystemUi = true, backgroundColor = 0x1f000F0F, showBackground = true)
 @Composable
 fun PreviewCharacterPreview() {
+    val previewImageUri = "https://i.ytimg.com/vi/QLBRYAPRBy4/sddefault.jpg"
     val model = CharacterModel(
-        "TestMan", "Testers gonna test", rememberAsyncImagePainter(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data("https://iili.io/JMnuDI2.png")
-                .crossfade(true)
-                .build()
-        )
+        "TestMan",
+        "Testers gonna test",
+        img = previewImageUri
     )
-    DrawCharacterPreview(Modifier, model)
+    CharacterPreview(
+        Modifier.border(width = 1.dp, color = Color.Red),
+        model
+    )
 }

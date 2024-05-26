@@ -12,12 +12,24 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 import com.example.marvel.R
+import com.example.marvel.model.CharacterModel
 
 @Composable
 fun ChooseYourHeroScreen(modifier: Modifier = Modifier) {
+
+    val previewImageUri =
+        "https://i.ytimg.com/vi/QLBRYAPRBy4/sddefault.jpg"
+    val model = CharacterModel(
+        "TestMan", "Testers gonna test", previewImageUri
+    )
+    val list: List<CharacterModel> = listOf(model, model, model)
+
     Row(
         modifier = modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
     ) {
@@ -36,6 +48,7 @@ fun ChooseYourHeroScreen(modifier: Modifier = Modifier) {
                     .padding(top = 30.dp)
                     .align(Alignment.CenterHorizontally)
             )
+            CharacterScroll(modifier, list)
         }
         Spacer(modifier = modifier)
     }
