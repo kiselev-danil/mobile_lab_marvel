@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,26 +13,25 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.marvel.R
 import com.example.marvel.model.CharacterModel
+import com.example.marvel.ui.theme.BackgroundBlack
+import com.example.marvel.ui.theme.MarvelAppTheme
+import com.example.marvel.util.MockObjects
 
 @Composable
-fun ChooseYourHeroScreen(modifier: Modifier = Modifier) {
-
-    val previewImageUri =
-        "https://i.ytimg.com/vi/QLBRYAPRBy4/sddefault.jpg"
-    val model = CharacterModel(
-        "TestMan", "Testers gonna test", previewImageUri
-    )
-    val list: List<CharacterModel> = listOf(model, model, model)
+fun ChooseYourHeroScreen(modifier: Modifier = Modifier, onCharacterSelect: (String)->Unit) {
+    val list: List<CharacterModel> = MockObjects.map.toList()
 
     Row(
-        modifier = modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
+        modifier = modifier.fillMaxWidth()
     ) {
         Spacer(modifier = modifier)
         Column(
@@ -40,15 +40,19 @@ fun ChooseYourHeroScreen(modifier: Modifier = Modifier) {
             Image(
                 painter = painterResource(id = R.drawable.marvel_logo),
                 contentDescription = "There must be poster",
-                modifier = modifier
+                modifier = modifier.fillMaxWidth()
             )
             Text(
-                text = "Choose your hero",
+                text = stringResource(R.string.choose_hero_screen_text),
                 modifier = modifier
-                    .padding(top = 30.dp)
-                    .align(Alignment.CenterHorizontally)
+                    .padding(top = 24.dp, start = 16.dp, end = 16.dp)
+                    .fillMaxWidth(),
+                color = MarvelAppTheme.TextColors.white,
+                fontSize = MarvelAppTheme.TextStyle.Bold_48.fontSize,
+                fontWeight = MarvelAppTheme.TextStyle.Bold_48.fontWeight
+
             )
-            CharacterScroll(modifier, list)
+            CharacterScroll(modifier, list, onCharacterSelect)
         }
         Spacer(modifier = modifier)
     }
@@ -56,8 +60,8 @@ fun ChooseYourHeroScreen(modifier: Modifier = Modifier) {
 
 }
 
-@Preview(showSystemUi = true, backgroundColor = 0x1f000F0F, showBackground = true)
+@Preview(showSystemUi = true, backgroundColor = 0xFF2C272B, showBackground = true)
 @Composable
 fun PreviewChooseYourHeroScreen() {
-    ChooseYourHeroScreen()
+    ChooseYourHeroScreen(onCharacterSelect = {})
 }

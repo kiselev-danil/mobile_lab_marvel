@@ -4,8 +4,11 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -15,10 +18,11 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.marvel.R
 import com.example.marvel.model.CharacterModel
+import com.example.marvel.ui.theme.MarvelAppTheme
 
 @Composable
 fun CharacterPreview(modifier: Modifier = Modifier, model: CharacterModel) {
-    Box(modifier = modifier) {
+    Box(modifier = modifier.padding(vertical = 8.dp)) {
         AsyncImage(
             model = model.img,
             modifier = modifier
@@ -27,13 +31,22 @@ fun CharacterPreview(modifier: Modifier = Modifier, model: CharacterModel) {
                 .clip(RoundedCornerShape(16.dp)),
             contentDescription = stringResource(R.string.character_image_placeholder)
         )
+        Text(
+            text = model.name,
+            color = MarvelAppTheme.TextColors.white,
+            fontWeight = MarvelAppTheme.TextStyle.Bold_Character_Name.fontWeight,
+            fontSize = MarvelAppTheme.TextStyle.Bold_Character_Name.fontSize,
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(start = 18.dp, bottom = 48.dp)
+        )
     }
 }
 
 @Preview(showSystemUi = true, backgroundColor = 0x1f000F0F, showBackground = true)
 @Composable
 fun PreviewCharacterPreview() {
-    val previewImageUri = "https://i.ytimg.com/vi/QLBRYAPRBy4/sddefault.jpg"
+    val previewImageUri = stringResource(id = R.string.test_image_url)
     val model = CharacterModel(
         "TestMan",
         "Testers gonna test",

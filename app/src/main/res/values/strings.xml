@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">marvel</string>
     <string name="character_image_placeholder">We missed something… Nevermind</string>
+    <string name="choose_hero_screen_text">Choose your hero</string>
+    <string name="test_image_url">https://iili.io/JMnuDI2.png</string>
+    <string name="arrow_back">Back</string>
 </resources>
