@@ -4,4 +4,6 @@
     <string name="choose_hero_screen_text">Choose your hero</string>
     <string name="test_image_url">https://iili.io/JMnuDI2.png</string>
     <string name="arrow_back">Back</string>
+    <string name="character_name_placeholder">Mr Placeholder</string>
+    <string name="character_description_placeholder">I\'m here to chew bubblegum and to placehold things, and I\'m all outta gum</string>
 </resources>
