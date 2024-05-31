@@ -7,9 +7,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.marvel.components.CharacterScreen
 import com.example.marvel.components.ChooseYourHeroScreen
+import com.example.marvel.model.CharacterModel
+import com.example.marvel.service.CharacterService
 
 @Composable
-fun NavGraph(navController: NavHostController = rememberNavController()) {
+fun NavGraph(navController: NavHostController = rememberNavController(), characters: List<CharacterModel>, characterService: CharacterService) {
 
     NavHost(
         navController = navController,
@@ -17,6 +19,7 @@ fun NavGraph(navController: NavHostController = rememberNavController()) {
     ) {
         composable(route = NavRoutes.ChooseYourHeroScreen.toString()) {
             ChooseYourHeroScreen(
+                charactersList = characters,
                 onCharacterSelect = { id -> navController.navigate(NavRoutes.CharacterScreen.toString() + "/" + id) }
             )
         }
@@ -24,7 +27,8 @@ fun NavGraph(navController: NavHostController = rememberNavController()) {
             CharacterScreen(
                 modelId = backStackEntry.arguments?.getString("modelId")
                     ?: throw Exception("Cannot get nav param"),
-                onNavigateBack = { navController.popBackStack() }
+                onNavigateBack = { navController.popBackStack() },
+                characterService = characterService
             )
         }
     }

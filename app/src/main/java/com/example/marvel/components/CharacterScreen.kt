@@ -24,12 +24,23 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.marvel.R
 import com.example.marvel.model.CharacterModel
+import com.example.marvel.service.CharacterService
 import com.example.marvel.ui.theme.MarvelAppTheme
 import com.example.marvel.util.MockObjects
+import kotlinx.coroutines.runBlocking
 
 @Composable
-fun CharacterScreen(modifier: Modifier = Modifier, modelId: String, onNavigateBack: () -> Unit) {
-    val model:CharacterModel = MockObjects.findCharacterByName(modelId)?:throw Error("Cannot get object")
+fun CharacterScreen(
+    modifier: Modifier = Modifier,
+    modelId: String,
+    onNavigateBack: () -> Unit,
+    characterService: CharacterService
+) {
+    val model: CharacterModel
+    runBlocking {
+        model = characterService.findCharacterById(modelId)?: throw Exception("Cannot obtain character with such id")
+    }
+
     Box {
         Box(modifier = modifier) {
             AsyncImage(
@@ -45,7 +56,7 @@ fun CharacterScreen(modifier: Modifier = Modifier, modelId: String, onNavigateBa
                     .padding(start = 8.dp, bottom = 18.dp)
 
             ) {
-                IconButton(modifier = Modifier.padding(top = 16.dp),onClick = onNavigateBack) {
+                IconButton(modifier = Modifier.padding(top = 16.dp), onClick = onNavigateBack) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,
                         tint = MaterialTheme.colorScheme.onSecondary,
@@ -91,12 +102,12 @@ fun CharacterScreen(modifier: Modifier = Modifier, modelId: String, onNavigateBa
     }
 }
 
-@Composable
-@Preview
-fun PreviewCharacterScreen() {
-    val previewImageUri = stringResource(id = R.string.test_image_url)
-    val model = CharacterModel(
-        "TestMan", "Testers gonna test", img = previewImageUri
-    )
-    CharacterScreen(modelId = "3", onNavigateBack = {})
-}
+//@Composable
+//@Preview
+//fun PreviewCharacterScreen() {
+//    val previewImageUri = stringResource(id = R.string.test_image_url)
+//    val model = CharacterModel(
+//        "TestMan", "Testers gonna test", img = previewImageUri
+//    )
+//    CharacterScreen(modelId = "3", onNavigateBack = {})
+//}

@@ -4,31 +4,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberAsyncImagePainter
-import coil.request.ImageRequest
+import androidx.compose.ui.text.style.TextAlign
 import com.example.marvel.R
 import com.example.marvel.model.CharacterModel
-import com.example.marvel.ui.theme.BackgroundBlack
 import com.example.marvel.ui.theme.MarvelAppTheme
 import com.example.marvel.util.MockObjects
 
 @Composable
-fun ChooseYourHeroScreen(modifier: Modifier = Modifier, onCharacterSelect: (String)->Unit) {
-    val list: List<CharacterModel> = MockObjects.map.toList()
+fun ChooseYourHeroScreen(
+    modifier: Modifier = Modifier,
+    charactersList: List<CharacterModel> = MockObjects.map.toList(),
+    onCharacterSelect: (String) -> Unit
+) {
 
     Row(
         modifier = modifier.fillMaxWidth()
@@ -49,10 +45,10 @@ fun ChooseYourHeroScreen(modifier: Modifier = Modifier, onCharacterSelect: (Stri
                     .fillMaxWidth(),
                 color = MarvelAppTheme.TextColors.white,
                 fontSize = MarvelAppTheme.TextStyle.Bold_48.fontSize,
-                fontWeight = MarvelAppTheme.TextStyle.Bold_48.fontWeight
-
+                fontWeight = MarvelAppTheme.TextStyle.Bold_48.fontWeight,
+                textAlign = TextAlign.Center
             )
-            CharacterScroll(modifier, list, onCharacterSelect)
+            CharacterScroll(modifier, charactersList, onCharacterSelect)
         }
         Spacer(modifier = modifier)
     }

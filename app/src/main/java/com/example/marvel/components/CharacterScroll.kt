@@ -29,7 +29,7 @@ fun CharacterScroll(modifier: Modifier = Modifier, characters: List<CharacterMod
     ) {
         itemsIndexed(characters) { index, item ->
             CharacterPreview(
-                modifier = Modifier.clickable { onCharacterSelect(item.name) },
+                modifier = Modifier.clickable { onCharacterSelect(item.id.toString()) },
                 model = item
             )
             if (index < characters.lastIndex) {
@@ -51,7 +51,7 @@ fun PreviewCharacterScroll() {
     val previewImageUri =
         stringResource(id = R.string.test_image_url)
     val model = CharacterModel(
-        "TestMan", "Testers gonna test", previewImageUri
+        0,"TestMan", "Testers gonna test", previewImageUri
     )
     val list: List<CharacterModel> = listOf(model, model, model)
     CharacterScroll(Modifier.border(width = 1.dp, color = Color.Red), characters = list, onCharacterSelect = {})

@@ -48,6 +48,7 @@ fun CharacterPreview(modifier: Modifier = Modifier, model: CharacterModel) {
 fun PreviewCharacterPreview() {
     val previewImageUri = stringResource(id = R.string.test_image_url)
     val model = CharacterModel(
+        0,
         "TestMan",
         "Testers gonna test",
         img = previewImageUri
