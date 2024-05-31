@@ -4,6 +4,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Divider
@@ -29,7 +30,9 @@ fun CharacterScroll(modifier: Modifier = Modifier, characters: List<CharacterMod
     ) {
         itemsIndexed(characters) { index, item ->
             CharacterPreview(
-                modifier = Modifier.clickable { onCharacterSelect(item.id.toString()) },
+                modifier = Modifier
+                    .clickable { onCharacterSelect(item.id.toString()) }
+                    .width(width = 300.dp),
                 model = item
             )
             if (index < characters.lastIndex) {
