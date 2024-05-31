@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    id("com.google.devtools.ksp") version "2.0.0-1.0.21"
+    id("kotlin-kapt")
 }
 
 android {
@@ -77,5 +77,5 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    ksp(libs.moshi.kotlin.codegen)
+    kapt(libs.moshi.kotlin.codegen)
 }
